@@ -18,9 +18,9 @@ import org.apache.log4j.helpers.LogLog;
 */
 public class SyslogWriter64k extends Writer {
 
-  final int SYSLOG_PORT = 514;
+  private int SYSLOG_PORT = 514;
   static String syslogHost;
-  
+
   private InetAddress address;
   private DatagramSocket ds;
 
@@ -28,19 +28,32 @@ public class SyslogWriter64k extends Writer {
   SyslogWriter64k(String syslogHost) {
     this.syslogHost = syslogHost;
 
-    try {      
-      this.address = InetAddress.getByName(syslogHost);
-    }
-    catch (UnknownHostException e) {
-      LogLog.error("Could not find " + syslogHost +
-			 ". All logging will FAIL.", e);
+    if(syslogHost.indexOf(":") != -1) {
+      String [] splittedSyslogHost = syslogHost.split(":");
+      try {
+        this.address = InetAddress.getByName(splittedSyslogHost[0]);
+        this.SYSLOG_PORT = Integer.valueOf(splittedSyslogHost[1]);
+      }
+      catch (UnknownHostException e) {
+        LogLog.error("Could not find " + syslogHost +
+         ". All logging will FAIL.", e);
+      }
+
+    } else {
+      try {
+        this.address = InetAddress.getByName(syslogHost);
+      }
+      catch (UnknownHostException e) {
+        LogLog.error("Could not find " + syslogHost +
+         ". All logging will FAIL.", e);
+      }
     }
 
     try {
       this.ds = new DatagramSocket();
     }
     catch (SocketException e) {
-      e.printStackTrace(); 
+      e.printStackTrace();
       LogLog.error("Could not instantiate DatagramSocket to " + syslogHost +
 			 ". All logging will FAIL.", e);
     }
@@ -51,7 +64,7 @@ public class SyslogWriter64k extends Writer {
   void write(char[] buf, int off, int len) throws IOException {
     this.write(new String(buf, off, len));
   }
-  
+
   public
   void write(String string) throws IOException {
     byte[] bytes = string.getBytes();
@@ -60,7 +73,7 @@ public class SyslogWriter64k extends Writer {
 
     if(this.ds != null)
       ds.send(packet);
-    
+
   }
 
   public
