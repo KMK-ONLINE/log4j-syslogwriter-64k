@@ -6,10 +6,23 @@
   <name>log4jSyslogWriter64k</name>
   <description>Writes logs up to 64k in Syslog</description>
   <dependencies>
-  	<dependency>
-  		<groupId>log4j</groupId>
-  		<artifactId>log4j</artifactId>
-  		<version>1.2.17</version>
-  	</dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
   </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>bbmtek-snapshot</id>
+      <name>bbmtek-snapshot</name>
+      <url>https://kmklabs.jfrog.io/kmklabs/bbmtek-snapshot</url>
+    </snapshotRepository>
+    <repository>
+      <id>bbmtek-release</id>
+      <name>bbmtek-releases</name>
+      <url>https://kmklabs.jfrog.io/kmklabs/bbmtek-release</url>
+    </repository>
+  </distributionManagement>
 </project>
+
