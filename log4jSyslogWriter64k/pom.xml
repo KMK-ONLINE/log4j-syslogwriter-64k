@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.psquickitjayant</groupId>
   <artifactId>log4jSyslogWriter64k</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>log4jSyslogWriter64k</name>
   <description>Writes logs up to 64k in Syslog</description>
   <dependencies>
