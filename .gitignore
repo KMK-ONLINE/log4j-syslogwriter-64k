@@ -10,3 +10,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# mvn idea:idea meta files
+*.iml
+*.ipr
+*.iws
+
+# mvn target
+log4jSyslogWriter64k/target/
